@@ -1,0 +1,22 @@
+Modelo User
+
+User{
+    name: string,
+    nickname: string,
+    email: string,
+    secondaryEmail:string,
+    lastName: string,
+    password: string,
+    accounts: {[object: Account]},
+    phone: string,
+    active: boolean
+}
+
+Account{
+    wallpaper: string,
+    name: string,
+    description: string,
+    url:string,
+    login: string,
+    password: string 
+}
