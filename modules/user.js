@@ -4,15 +4,45 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = Schema({
-    name: String,
-    lastName: String,
-    nickname: String,
-    email: String,
-    secondaryEmail:String,
-    password: String,
-    phone: String,
-    active: Boolean,
-    accounts: [String]
+    name: {
+            type: String, 
+            require:true
+        },
+    lastName: {
+            type: String, 
+            require:true
+        },
+    nickname: {
+            type: String, 
+            require:true
+        },
+    email: {
+            type: String, 
+            require:true
+        },
+    secondaryEmail:{
+            type: String, 
+            require:false
+        },
+    password: {
+            type: String, 
+            require:true
+        },
+    phone: {
+            type: String, 
+            require:false
+        },
+    active: {
+        type:Boolean,
+        default: true
+    },
+    user_accounts:[{
+        _id:false,
+        accounts:{
+            type: mongoose.Schema.Types.Mixed,
+            ref:"Account"
+        }
+    }]
 });
 
 module.exports = mongoose.model('User',UserSchema);
