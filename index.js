@@ -8,6 +8,6 @@ mongoose.connect(config.bd,(err,res)=>{
     console.log("conexion establecida");
 
     app.listen(config.port,()=>{
-        console.log(`Servidor corriendo ${config.port}`);
+        console.log(`Servidor corriendo puerto: ${config.port}`);
     });
 });
