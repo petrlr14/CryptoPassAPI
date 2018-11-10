@@ -8,6 +8,6 @@ mongoose.connect(config.bd,(err,res)=>{
     console.log("conexion establecida");
 
     app.listen(config.port,()=>{
-        console.log("Servidor corriendo localhost:8081")
+        console.log(`Servidor corriendo ${config.port}`);
     });
 });
