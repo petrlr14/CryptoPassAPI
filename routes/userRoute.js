@@ -3,8 +3,8 @@
 const express = require('express');
 const UserCtrl = require('../controllers/userController');
 const api = express.Router();
-const app = express();
+const auth = require('../middleware/auth');
 
-api.get('/users',UserCtrl.getAllUsers);
+api.get('/users',auth,UserCtrl.getAllUsers);
 
 module.exports = api;
