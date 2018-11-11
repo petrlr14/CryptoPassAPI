@@ -9,9 +9,11 @@ function isAuth(req,res,next){
     service.decodeToken(token)
         .then(response =>{
             req.user = response
+            console.log(req.user);
             next();
         })
         .catch(response =>{
+            console.log("entro al catch")
             res.status(response.status).send(response.message);
         })
 }
