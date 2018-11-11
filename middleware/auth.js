@@ -8,11 +8,11 @@ function isAuth(req,res,next){
     
     service.decodeToken(token)
         .then(response =>{
-            req.nickname = response
+            req.user = response
             next();
         })
         .catch(response =>{
-            res.status(response.status).send({message:"Error al decodificar"});
+            res.status(response.status).send(response.message);
         })
 }
 
