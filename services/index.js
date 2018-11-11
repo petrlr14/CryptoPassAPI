@@ -29,7 +29,7 @@ function decodeToken(token){
                 message: "Invalid token"
             });
         }
-        return decode;
     })
+    return decode;
 }
 module.exports = {createToken,decodeToken};
