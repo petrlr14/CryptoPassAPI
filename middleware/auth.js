@@ -1,5 +1,5 @@
 'use strict'
-const service = require('../services/index')
+const service = require('../services')
 function isAuth(req,res,next){
     if(!req.headers.authorization){
         return res.status(403).send({message:'No authorization'})
@@ -8,7 +8,7 @@ function isAuth(req,res,next){
     
     service.decodeToken(token)
         .then(response =>{
-            req.user = response
+            req.nickname = response
             next();
         })
         .catch(response =>{
