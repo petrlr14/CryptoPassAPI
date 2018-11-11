@@ -1,7 +1,7 @@
 'use strict'
 const service = require('../services/index')
 function isAuth(req,res,next){
-    if(!req.headers.autorization){
+    if(!req.headers.authorization){
         return res.status(403).send({message:'No authorization'})
     }
     const token = req.headers.autorization.split(" ")[1];
