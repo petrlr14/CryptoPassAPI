@@ -11,9 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "jwt-simple": "^0.5.5",
+    "moment": "^2.22.2",
     "mongoose": "^5.3.9"
   },
   "devDependencies": {

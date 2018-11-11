@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt-nodejs');
 
 const UserSchema = new Schema({
     name: {
@@ -14,11 +15,13 @@ const UserSchema = new Schema({
         },
     nickname: {
             type: String, 
-            require:true
+            require:true,
+            unique: true
         },
     email: {
             type: String, 
-            require:true
+            require:true,
+            unique: true
         },
     secondaryEmail:{
             type: String, 
@@ -44,5 +47,21 @@ const UserSchema = new Schema({
         }
     }]
 });
+
+UserSchema.pre('save',(next)=>{
+    let user = this;
+    if(!user.isModified('password')) return next();
+
+    bcrypt.genSalt(12, (err,salt)=>{
+        if(err) return next();
+
+        bcrypt.hash(user.password, salt,null,(err,hash)=>{
+            if(err) return next(err);
+
+            user.password = hash;
+            next();
+        });
+    });
+})
 
 module.exports = mongoose.model('User',UserSchema);
