@@ -12,4 +12,24 @@ function createToken(user){
     return jwt.encode(payload,config.SECRET_TOKEN)
 }
 
-module.exports = createToken;
+function decodeToken(token){
+    const decode = new Promise((resolve,reject)=>{
+        try{
+            const payload = jwt.decode(token, config.SECRET_TOKEN);
+            if(payload.exp <= moment().unix()){
+                reject({
+                    status: 401,
+                    message: 'Expired Token'
+                })
+                resolve(payload.sub);
+            }
+        }catch(err){
+            reject({
+                status:500,
+                message: "Invalid token"
+            });
+        }
+        return decode;
+    })
+}
+module.exports = {createToken,decodeToken};
