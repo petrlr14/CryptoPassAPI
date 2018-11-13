@@ -5,6 +5,6 @@ const AuthCtrl = require('../controllers/authController');
 const api = express.Router();
 
 api.post('/signUp',AuthCtrl.signUp);
-api.get('/signIn',AuthCtrl.signIn);
+api.post('/signIn',AuthCtrl.signIn);
 
 module.exports = api;
