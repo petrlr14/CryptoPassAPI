@@ -10,11 +10,12 @@ function getAllUsers(req,res){
     });
 }
 function getUserByNickname(req,res){
-    let nickname = req.body.nickname;
+    let nickname = req.params.nickname;
     User.findOne({'nickname':nickname},(err, user)=>{
         if(err) return res.status(500).send({message:"internal error"});
         if(!user) return res.status(404).send({message:"404 user not found"});
-        res.status(200).send({user});
+        
+        return res.status(200).send({user});
     })
 }
 

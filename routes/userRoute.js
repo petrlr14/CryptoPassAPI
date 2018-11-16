@@ -6,6 +6,6 @@ const api = express.Router();
 const auth = require('../middleware/auth');
 
 api.get('/users',auth,UserCtrl.getAllUsers);
-api.get('/myUser',auth,UserCtrl.getUserByNickname);
+api.get('/myUser/:nickname',auth,UserCtrl.getUserByNickname);
 
 module.exports = api;
