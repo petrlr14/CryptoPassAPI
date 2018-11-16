@@ -38,7 +38,7 @@ const UserSchema = new Schema({
     user_accounts:[{
         _id:false,
         accounts:{
-            type: mongoose.Schema.Types.Mixed,
+            type: mongoose.Schema.Types.ObjectId,
             ref:"Account"
         }
     }]
