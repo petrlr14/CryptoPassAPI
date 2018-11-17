@@ -43,7 +43,31 @@ function newAccount(req,res){
     
 
 }
+function deleteAccount(req,res){
+    let nameAccount = req.params.nameAccount;
+    let userId = req.body._id;
+    User.findById(userId,(err,usr)=>{
+        if(err) return res.status(500).send({message:'Internal Error'});
+        if(!usr) return res.status(404).send({message:'404 User not found'});
+        Account.findOne({'nameAccount':nameAccount},(err,account)=>{
 
+            if(err) return res.status(500).send({message:'Internal error'});
+            if(!account) return res.status(404).send({message:'Account not found 404'});
+            
+            usr.user_accounts.forEach(element => {
+                if(element.id_account == account._id){
+                    usr.user_accounts.splice(usr.user_accounts.indexOf(element),1);
+                }
+            });
+            Account.findByIdAndDelete(account._id,(err,res)=>{
+                if(err) return res.status(500).send({message:'Internal Error'});
+
+                return res.status(200).send({message:'Account removed successfuly'})
+            })
+        })
+    })
+}
 module.exports ={
-    newAccount
+    newAccount,
+    deleteAccount
 }
