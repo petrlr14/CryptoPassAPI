@@ -7,5 +7,6 @@ const auth = require('../middleware/auth');
 
 api.get('/users',auth,UserCtrl.getAllUsers);
 api.get('/myUser/:nickname',auth,UserCtrl.getUserByNickname);
+api.get('/getMyAccounts/:nickname',auth,UserCtrl.getUserAccountsByNickname);
 
 module.exports = api;
