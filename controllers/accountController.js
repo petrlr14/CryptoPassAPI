@@ -43,28 +43,30 @@ function newAccount(req,res){
     
 
 }
+//EDITAR METODO PARA ELIMINAR LA CUENTA POR ID Y NO POR NOMBRE
 function deleteAccount(req,res){
-    let nameAccount = req.params.nameAccount;
-    let userId = req.body._id;
+    let idAccount = req.params.idAccount;
+    let userId = req.body.idUser;
+
     User.findById(userId,(err,usr)=>{
         if(err) return res.status(500).send({message:'Internal Error'});
         if(!usr) return res.status(404).send({message:'404 User not found'});
-        Account.findOne({'nameAccount':nameAccount},(err,account)=>{
 
-            if(err) return res.status(500).send({message:'Internal error'});
-            if(!account) return res.status(404).send({message:'Account not found 404'});
-            
-            usr.user_accounts.forEach(element => {
-                if(element.id_account == account._id){
-                    usr.user_accounts.splice(usr.user_accounts.indexOf(element),1);
-                }
-            });
-            Account.findByIdAndDelete(account._id,(err,res)=>{
-                if(err) return res.status(500).send({message:'Internal Error'});
+        usr.user_accounts.forEach(element => {
+            if(element.id_account == idAccount){
+                usr.user_accounts.splice(usr.user_accounts.indexOf(element),1);
+            }
+        });
+       
+        Account.findOneAndDelete({'_id':idAccount},(err,response)=>{
+            if(err) return res.status(500).send({message:'Internal Error'});
 
-                return res.status(200).send({message:'Account removed successfuly'})
-            })
         })
+        usr.save((err,usrUpt)=>{
+            if(err) return res.status(500).send({message:'Internal error'})
+        })
+        return res.status(200).send({message:'Account removed successfuly'});
+
     })
 }
 module.exports ={
