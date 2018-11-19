@@ -18,8 +18,8 @@ function newAccount(req,res){
         if(err) return res.status(500).send({message:'internal error'})
         if(!usr) return res.status(404).send({message:"User not found, please sign"})
         privateKey = usr.password.substring(0,31);
-        newAccount.password = AES.encrypt(newAccount.password,privateKey);
-        newAccount.login = AES.encrypt(newAccount.login,privateKey);
+        newAccount.password = AES.encrypt(newAccount.password,privateKey).toString();
+        newAccount.login = AES.encrypt(newAccount.login,privateKey).toString();
         
         newAccount.save((err,account)=>{
             if(err) return res.status(500).send({message:`somthing is wrong ${err}`});
