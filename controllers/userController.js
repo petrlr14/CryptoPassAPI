@@ -23,7 +23,7 @@ function getUserAccountsByNickname(req,res){
     User.findOne({'nickname':nickname},(err,usr)=>{
         if(err) return res.status(500).send({message:`Internal error ${err}`});
         if(!usr) return res.status(404).send({message:'Error 404 user not found'});
-        let accouts = usr.user_accounts.accouts;
+        let accouts = usr.user_accounts;
         res.status(200).send({accouts});
     })
 }
