@@ -10,13 +10,13 @@ const AccountSchema = new Schema({
     name: {
         type:String,
         required:true,
-        unique:true
     },
     description: {
         type:String
     },
     url:{
-        type:String
+        type:String,
+        required:true
     },
     login: {
         type:String,
