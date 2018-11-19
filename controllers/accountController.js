@@ -68,15 +68,15 @@ function deleteAccount(req,res){
         return res.status(200).send({message:'Account removed successfuly'});
 
     })
-    function getAccount(req,res){
-        let idAccount =req.params.idAccount;
-        Account.findById(idAccount,(err,acnt)=>{
-            if(err) return res.status(500).send({message:`Internal error ${err}`});
-            if(!acnt) return res.status(404).send({message:'Account not found ERROR 404!'});
+}
+function getAccount(req,res){
+    let idAccount =req.params.idAccount;
+    Account.findById(idAccount,(err,acnt)=>{
+        if(err) return res.status(500).send({message:`Internal error ${err}`});
+        if(!acnt) return res.status(404).send({message:'Account not found ERROR 404!'});
 
-            return res.status(200).send({acnt})
-        })
-    }
+        return res.status(200).send({acnt})
+    })
 }
 module.exports ={
     newAccount,
