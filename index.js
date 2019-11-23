@@ -4,13 +4,24 @@ const app = require('./app');
 const config = require("./config");
 
 
-mongoose.connect(config.bd,(err,res)=>{
-    if(err) throw err
-    console.log("conexion establecida");
+const retry = ()=>{
+	return connect();
+}
 
-    app.listen(config.port,()=>{
-        console.log(`Servidor corriendo puerto: ${config.port}`);
-    });
+const connect=()=>{
+	mongoose.connect(config.bd,(err,res)=>{
+	    if(err){
+    		console.log(err);
+	    	setTimeout(retry, 5000)
+	    }
+	    console.log("conexion establecida");
+
+	    app.listen(config.port,()=>{
+        	console.log(`Servidor corriendo puerto: ${config.port}`);
+	    });
     
-});
+	});
+}
+
+connect();
 
